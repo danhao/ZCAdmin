@@ -1,0 +1,35 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="debtListWindow" border="none" apply="com.zc.manage.web.DebtListCtrl" width="100%" height="100%">
+		<borderlayout>
+			<center border="0" autoscroll="true">
+				<div sclass="div_center">
+					<hbox align="end">
+						<label value="创建时间：" />
+						<datebox id="db_st" format="yyyy-MM-dd" />
+						<label value="至" />
+						<datebox id="db_et" format="yyyy-MM-dd" />
+						<listbox id="ls_search_state" mold="select" width="120px" />
+						<label value="ID：" />
+						<textbox id="tb_search_value" width="150px" />
+						<button id="btn_search" label="搜索" tooltiptext="搜索"/>
+					</hbox>
+					<listbox id="listBoxDebt" multiple="true" checkmark="true">
+						<listhead>
+							<listheader id="lh_id" label="id"  width="180px"/>
+							<listheader label="价格（分）" />
+							<listheader label="类型" />
+							<listheader label="起拍价格/代理费率"  width="150px"/>
+							<listheader label="代理期限" />
+							<listheader label="到期时间" />
+							<listheader label="创建时间" />
+							<listheader label="状态" />
+						</listhead>
+					</listbox>
+					<paging id="paging_debtList" />
+				</div>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

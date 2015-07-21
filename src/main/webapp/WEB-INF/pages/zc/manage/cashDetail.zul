@@ -1,0 +1,43 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="cashDialogWindow" title="提现详细" border="normal" width="400px" height="500px" apply="com.zc.manage.web.CashDetailCtrl" closable="true">
+		<caption id="cp_title"/>
+		<borderlayout>
+			<center border="none" autoscroll="true">
+				<div>
+					<grid fixedLayout="true">
+						<columns>
+							<column label="项目" width="120px" />
+							<column label="内容" />
+						</columns>
+						<rows>
+							<row>ID：<textbox id="id" value="" readonly="true"/></row>		
+							<row>用户ID：<textbox id="playerId" value="" readonly="true"/></row>
+							<row>金额：<textbox id="amount" value="" readonly="true"/></row>
+							<row>开户名：<textbox id="name" value="" readonly="true"/></row>
+							<row>账户类型：<textbox id="type" value="" readonly="true"/></row>
+							<row>银行：<textbox id="bankName" value="" readonly="true"/></row>
+							<row>开户行所在地：<textbox id="bankAddr" value="" readonly="true"/></row>
+							<row>开户行网点：<textbox id="bankBranch" value="" readonly="true"/></row>
+							<row>银行卡号：<textbox id="cardNo" value="" readonly="true"/></row>							 
+							<row>状态：<textbox id="status" value="" readonly="true"/></row>
+							<row>创建时间：<textbox id="createAt" value="" readonly="true"/></row>
+							<row>完成时间：<textbox id="finishAt" value="" readonly="true"/></row>
+							<row>说明：<textbox id="description" value=""/></row>
+						</rows>
+					</grid>
+				</div>
+			</center>
+			<south border="none" margins="0,0,0,0">
+				<toolbar zclass="dialog_toolbar">
+					<button id="btn_succ" label="成功" tooltiptext="提现成功" />
+					<button id="btn_fail" label="失败" tooltiptext="提现失败" />
+					<button id="btn_cancel"  label="取消" />
+				</toolbar>
+			</south>
+		</borderlayout>
+	</window>
+</zk>
+
+

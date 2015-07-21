@@ -1,0 +1,38 @@
+<?page id="login_page" title="管理平台-管理员登陆" contentType="text/html;charset=UTF-8"?>
+<?meta content="text/html; charset=UTF-8" pageEncoding="UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<?link rel="shortcut icon" type="image/png" href="/images/favicon.png"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="loginwin" border="none" width="350px" height="500px" mode="overlapped" position="center" shadow="false" apply="com.zc.common.web.LoginCtrl">
+		<panel id="login_panel" border="none" title="管理平台" height="180px" framable="true" style="background-color: #EBEBEB;">
+			<caption src="/images/icons/16/user_login.png" label="管理员登陆" style="padding:8px 5px"></caption>
+			<panelchildren>
+				<div style="padding:5px">
+					<h:form id="f" name="f" action="j_spring_security_check" method="POST" style="padding:0;maring:0">
+						<h:div style="color:red;margin-bottom:5px" if="${not empty param.login_error}">登陆失败，请重试或联系系统管理员！</h:div>
+						<grid>
+							<columns>
+								<column width="25%" align="right"/>
+								<column width="75%" />
+							</columns>
+							<rows>
+								<row>
+									<label id="label_ZKLoginDialog_user" value="用户名：" />
+									<textbox id="txtbox_Username" name="j_username" width="98%" value="" />
+								</row>
+								<row>
+									<label id="label_ZKLoginDialog_pwd" value="密&#160;&#160;&#160;码：" />
+									<textbox id="txtbox_Password" type="password" name="j_password" width="98%" value="" />
+								</row>
+								<row>
+									<h:span/>
+									<h:input type="submit" value="登陆" />
+								</row>
+							</rows>
+						</grid>
+					</h:form>
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

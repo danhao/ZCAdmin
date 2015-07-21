@@ -1,0 +1,49 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="roleRightListWindow" border="none" apply="com.zc.common.web.sec.RoleRightListCtrl" width="100%" height="100%">
+		<borderlayout>
+			<center border="0" autoscroll="true">
+				<div sclass="div_center">
+					<columnlayout>
+						<columnchildren width="30%" style="padding-right: 5px">
+							<panel id="panel_RoleRight_Role" title="角色列表" border="none" framable="true">
+								<panelchildren>
+									<div class="panel_div">
+										<hbox align="end">
+											<button id="btn_refresh" label="刷新" tooltiptext="刷新" />
+											<button id="btn_role_right_save" label="保存" />
+										</hbox>
+										<listbox id="listBoxRole" vflex="true" width="100%" height="100%" multiple="false">
+											<listhead>
+												<listheader id="lh_role_name" width="100%" label="角色名" />
+											</listhead>
+										</listbox>
+										<paging id="paging_ListBoxRole" />
+									</div>
+								</panelchildren>
+							</panel>
+						</columnchildren>
+
+						<columnchildren width="70%">
+							<panel id="panel_UserRole_GrantedRoles" title="当前拥有权限资源列表" border="none" framable="true">
+								<panelchildren>
+									<div class="panel_div">
+										<listbox vflex="true" id="listBoxRight" width="100%" height="100%" multiple="false">
+											<listhead>
+												<listheader id="lh_right_id" width="10%" label="" image="/images/icons/16/checkbox.gif" />
+												<listheader id="lh_right_name" width="30%" label="权限资源名" />
+												<listheader id="lh_right_descn" width="60%" label="说明" />
+											</listhead>
+										</listbox>
+										<paging id="paging_ListBoxRight" />
+									</div>
+								</panelchildren>
+							</panel>
+						</columnchildren>
+					</columnlayout>
+				</div>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

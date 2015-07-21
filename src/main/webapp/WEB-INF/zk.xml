@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/login.zul</timeout-uri>
+	</device-config>
+
+	<system-config>
+		<ui-factory-class>
+			org.zkoss.zk.ui.http.SerializableUiFactory
+		</ui-factory-class>
+	</system-config>
+
+	<listener>
+		<description>ThreadLocal Synchronization Listener
+		</description>
+		<listener-class>org.zkoss.zkplus.util.ThreadLocalListener
+		</listener-class>
+	</listener>
+
+	<!-- ====================================================== -->
+	<!--         Besides that, you have to specify what         -->
+	<!--         ThreadLocal variables you want to sync.        -->
+	<!--   1. Spring  RequestContextHolder                      -->
+	<!--   2. Spring  ThreadLocalSecurityContextHolderStrategy  -->
+	<!-- ====================================================== -->
+	<preference>
+		<name>ThreadLocal</name>
+		<value>
+			org.springframework.security.core.context.ThreadLocalSecurityContextHolderStrategy=contextHolder;
+			org.springframework.web.context.request.RequestContextHolder=requestAttributesHolder,inheritableRequestAttributesHolder;
+		</value>
+	</preference>
+
+	<!-- ====================================================== -->
+	<!--                Path to the own error page              -->
+	<!-- ====================================================== -->
+	<error-page>
+		<exception-type>java.lang.Throwable
+		</exception-type>
+		<location>/error.zul</location>
+	</error-page>
+
+	<!-- ====================================================== -->
+	<!--   Maximal count of desktops which a session can hold   -->
+	<!-- ====================================================== -->
+	<session-config>
+		<max-desktops-per-session>15</max-desktops-per-session>
+	</session-config>
+</zk>

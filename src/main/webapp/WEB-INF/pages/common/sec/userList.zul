@@ -1,0 +1,32 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="userListWindow" border="none" apply="com.zc.common.web.sec.UserListCtrl" width="100%" height="100%">
+		<borderlayout>
+			<center border="0" autoscroll="true">
+				<div sclass="div_center">
+					<hbox align="end">
+						<label value="时间：" />
+						<datebox id="db_st" format="yyyy-MM-dd" />
+						<label value="至" />
+						<datebox id="db_et" format="yyyy-MM-dd" />
+						<button id="btn_search" label="搜索" tooltiptext="搜索"/>
+						<button id="btn_refresh" label="刷新" tooltiptext="刷新" />
+						<button id="btn_user_new" label="新增" tooltiptext="新增" />
+						<button id="btn_user_del" label="删除" tooltiptext="删除" />
+					</hbox>
+					<listbox id="listBoxUser" multiple="true" checkmark="true">
+						<listhead>
+							<listheader id="lh_user_id" label="" width="15%" />
+							<listheader id="lh_user_name" label="用户名" width="30%" />
+							<listheader id="lh_user_enabled" label="是否可用" width="15%" />
+							<listheader label="说明" />
+							<listheader id="lh_user_created_at" label="建立时间" width="15%" />
+						</listhead>
+					</listbox>
+					<paging id="paging_userList" />
+				</div>
+			</center>
+		</borderlayout>
+	</window>
+</zk>

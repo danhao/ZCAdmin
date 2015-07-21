@@ -1,0 +1,5 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="mainMenuWindow" border="none" use="com.zc.common.web.menu.MainMenuCtrl"></window>
+</zk>

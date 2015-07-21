@@ -1,0 +1,13 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="mainMenuWindow" border="none" apply="com.zc.common.web.menu.MainMenuCtrl">
+		<div id="div_menu" style="height:100%;background:red"></div>
+
+		<menupopup id="tabsMenuPopup">
+			<menuitem id="close_current_tab" label="关闭选中标签页" />
+			<menuitem id="close_other_tab" label="关闭其他标签页" />
+			<menuitem id="close_all_tab" label="关闭所有标签页" />
+		</menupopup>
+	</window>
+</zk>

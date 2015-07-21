@@ -1,0 +1,36 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="roleDialogWindow" title="角色管理" border="normal" width="400px" height="145px" apply="com.zc.common.web.sec.RoleDialogCtrl" closable="true">
+		<borderlayout>
+			<center border="none">
+				<div>
+					<grid fixedLayout="true">
+						<columns>
+							<column label="项目" width="80px" />
+							<column label="内容" />
+						</columns>
+						<rows>
+							<row>
+								角色名：
+								<textbox id="tb_role_name" value="ROLE_" constraint="/^(ROLE_).+/:请使用ROLE_为前缀的名字。"/>
+							</row>
+							<row>
+								说明：
+								<textbox id="tb_role_descn" value="" constraint="no empty:请对角色就进简单的说明。"/>
+							</row>
+						</rows>
+					</grid>
+				</div>
+			</center>
+			<south border="none">
+				<toolbar zclass="dialog_toolbar">
+					<button id="btn_role_save" label="保存" />
+					<button id="btn_cancel" label="取消" />
+				</toolbar>
+			</south>
+		</borderlayout>
+	</window>
+</zk>
+
+

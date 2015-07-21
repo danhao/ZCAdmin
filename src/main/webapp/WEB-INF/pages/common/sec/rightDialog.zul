@@ -1,0 +1,32 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="rightDialogWindow" title="权限资源管理" border="normal" width="400px" height="200px" apply="com.zc.common.web.sec.RightDialogCtrl" closable="true">
+		<borderlayout>
+			<center border="none">
+				<div>
+					<grid fixedLayout="true">
+						<columns>
+							<column label="项目" width="100px" />
+							<column label="内容" />
+						</columns>
+						<rows>
+							<row>权限名称：<textbox id="tb_right_name" value="" width="150px"/></row>
+							<row>模块名：<listbox  id="lb_module" mold="select" rows="1" width="150px"/></row>
+							<row>资源类型：<listbox  id="lb_right_type" mold="select" rows="1" width="150px"/></row>
+							<row>说明：<textbox id="tb_right_descn" value="" width="150px"/></row>
+						</rows>
+					</grid>
+				</div>
+			</center>
+			<south border="none" margins="0,0,0,0">
+				<hbox spacing="5px">
+					<button id="btn_right_save"  label="保存" />
+					<button id="btn_cancel"  label="取消" />
+				</hbox>
+			</south>
+		</borderlayout>
+	</window>
+</zk>
+
+

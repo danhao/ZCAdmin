@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+	<classPathEntry location="e:\maven_repo\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar" />
+
+
+	<context id="sanguo_cdkey" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/zc_admin" userId="zc" password="zc" />
+		<javaModelGenerator targetPackage="com.zc.web.model" targetProject="ZCAdmin/src/main/java" />
+		<sqlMapGenerator targetPackage="com.zc.web.mybatis" targetProject="ZCAdmin/src/main/resources" />
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.zc.web.dao" targetProject="ZCAdmin/src/main/java" />
+		<table tableName="debt_opt_log" domainObjectName="DebtOptLog"/>
+	</context>
+</generatorConfiguration>

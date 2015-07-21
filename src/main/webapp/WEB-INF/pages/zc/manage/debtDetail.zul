@@ -1,0 +1,61 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
+<zk>
+	<window id="debtDialogWindow" title="债务管理" border="normal" width="400px" height="500px" apply="com.zc.manage.web.DebtDetailCtrl" closable="true">
+		<caption id="cp_title"/>
+		<borderlayout>
+			<center border="none" autoscroll="true">
+				<div>
+					<grid fixedLayout="true">
+						<columns>
+							<column label="项目" width="120px" />
+							<column label="内容" />
+						</columns>
+						<rows>
+							<row>ID：<textbox id="id" value="" readonly="true"/></row>		 
+							<row>标的价格：<textbox id="money" value="" /></row>
+							<row>类型：<listbox id="type" mold="select"/></row>
+							<row>起拍价格：<textbox id="price" value="" /></row>
+							<row>代理费率：<textbox id="rate" value="" /></row>
+							<row>代理期限：<textbox id="duration" value="" /></row>
+							<row>竞标到期时间：<textbox id="expireDays" value="" /></row>
+							<row>加价幅度：<textbox id="bidIncrease" value="" /></row>
+							<row>发布人ID：<textbox id="ownerId" value="" readonly="true"/></row>
+							<row>发布人：<textbox id="ownerName" value="" readonly="true"/></row>
+							<row>获单人ID：<textbox id="winnerId" value=""/></row>
+							<row>获单人：<textbox id="winnerName" value="" readonly="true"/></row>
+							<row>债权人姓名：<textbox id="creditorName" value="" readonly="true"/></row>
+							<row>债权人身份证：<html id="creditorFileId" /></row>
+							<row>债务人名称：<textbox id="debtorName" value="" /></row>
+							<row>债务人电话：<textbox id="debtorPhone" value="" /></row>
+							<row>债务人身份证号：<textbox id="debtorId" value="" /></row>
+							<row>地区/城市/区：<textbox id="debtorLocation" value="" /></row>
+							<row>详细地址：<textbox id="debtorAddr" value="" /></row>
+							<row>应归还时间：<textbox id="debtExpireTime" value="" /></row>
+							<row>抵押：<textbox id="mortgage" value="" /></row>
+							<row>判决时间：<textbox id="judgementTime" value="" /></row>
+							<row>债务成因：<textbox id="reason" value="" /></row>
+							<row>其他：<textbox id="descript" value="" /></row>
+							<row>文件：<html id="files" /></row>
+							<row>审核通过正式发布时间：<textbox id="publishTime" value="" readonly="true"/></row>
+							<row>创建时间：<textbox id="createTime" value="" readonly="true"/></row>
+							<row>结束时间：<textbox id="endTime" value="" readonly="true"/></row>
+							<row>状态：<listbox id="state" mold="select"/></row>
+						</rows>
+					</grid>
+				</div>
+			</center>
+			<south border="none" margins="0,0,0,0">
+				<toolbar zclass="dialog_toolbar">
+					<button id="btn_debt_save"  label="保存" />
+					<button id="btn_approve" label="通过" tooltiptext="审批通过" />
+					<button id="btn_bidwin" label="中标" tooltiptext="智能中标" />
+					<button id="btn_close" label="结单" tooltiptext="完成并转款" />
+					<button id="btn_cancel"  label="取消" />
+				</toolbar>
+			</south>
+		</borderlayout>
+	</window>
+</zk>
+
+
