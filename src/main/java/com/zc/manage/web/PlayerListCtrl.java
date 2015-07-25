@@ -120,7 +120,7 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		String pid = getPid();
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.QUERY_PLAYER.getCmd(), pid)));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.QUERY_PLAYER.getCmd(), "0", pid)));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
 		if (!WebUtils.handleJsonResult(obj)) {
 			return;
@@ -178,6 +178,7 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		dataModel.put("余额（分）", String.valueOf(player.getMoney()));
 		dataModel.put("类型", player.getType()==0?"个人":"企业");
 		dataModel.put("角色", player.getRole()==0?"债权人":"追债人");
+		dataModel.put("VIP", String.valueOf(player.getVip()));
 		if(player.getFileId() != null)
 			dataModel.put("身份证", "<a href='" + FileUtil.genDownloadUrl(player.getFileId().getId()) + "'>" + player.getFileId().getName() + "</a>");
 		if(player.getFileNoneCrime() != null)

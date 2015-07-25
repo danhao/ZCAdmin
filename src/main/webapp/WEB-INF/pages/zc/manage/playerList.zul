@@ -10,7 +10,7 @@
 						<panelchildren>
 							<hbox id="hbox_tool" align="end">
 								<listbox id="ls_search_zone" mold="select" width="120px" />
-								<label value="用户ID：" />
+								<label value="手机号或Email：" />
 								<textbox id="tb_search_value" width="350px" />
 								<button id="btn_search" label="搜索" tooltiptext="搜索" />
 								<label id="lb_search_msg" style="padding-left:10px" />
