@@ -139,7 +139,7 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	}
 	
 	public void onClick$btn_clear(Event event) throws Exception {
-		doValidate(-Constant.USER_EMAIL_VALIDATED - Constant.USER_MOBILE_VALIDATED);
+		doValidate(-Constant.USER_ID_VALIDATED - Constant.USER_CO_VALIDATED);
 	}
 
 	private void doValidate(int state) throws Exception{
