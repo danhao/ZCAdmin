@@ -146,7 +146,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	
 	public void onClick$btn_close(Event event) throws Exception {
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()), winnerId.getValue())));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()))));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		
