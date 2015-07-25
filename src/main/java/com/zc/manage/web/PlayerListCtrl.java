@@ -178,13 +178,20 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		dataModel.put("余额（分）", String.valueOf(player.getMoney()));
 		dataModel.put("类型", player.getType()==0?"个人":"企业");
 		dataModel.put("角色", player.getRole()==0?"债权人":"追债人");
-		dataModel.put("身份证", "<a href='" + FileUtil.genDownloadUrl(player.getFileId().getId()) + "'>" + player.getFileId().getName() + "</a>");
-		dataModel.put("无犯罪证明", "<a href='" + FileUtil.genDownloadUrl(player.getFileNoneCrime().getId()) + "'>" + player.getFileNoneCrime().getName() + "</a>");
-		dataModel.put("信用报告", "<a href='" + FileUtil.genDownloadUrl(player.getFileCredit().getId()) + "'>" + player.getFileCredit().getName() + "</a>");
-		dataModel.put("组织机构代码证", "<a href='" + FileUtil.genDownloadUrl(player.getFileOrganizationCode().getId()) + "'>" + player.getFileOrganizationCode().getName() + "</a>");
-		dataModel.put("营业执照", "<a href='" + FileUtil.genDownloadUrl(player.getFileBusinessLicence().getId()) + "'>" + player.getFileBusinessLicence().getName() + "</a>");
-		dataModel.put("税务登记证", "<a href='" + FileUtil.genDownloadUrl(player.getFileTaxNumber().getId()) + "'>" + player.getFileTaxNumber().getName() + "</a>");
-		dataModel.put("开户许可证", "<a href='" + FileUtil.genDownloadUrl(player.getFileAccountPermit().getId()) + "'>" + player.getFileAccountPermit().getName() + "</a>");
+		if(player.getFileId() != null)
+			dataModel.put("身份证", "<a href='" + FileUtil.genDownloadUrl(player.getFileId().getId()) + "'>" + player.getFileId().getName() + "</a>");
+		if(player.getFileNoneCrime() != null)
+			dataModel.put("无犯罪证明", "<a href='" + FileUtil.genDownloadUrl(player.getFileNoneCrime().getId()) + "'>" + player.getFileNoneCrime().getName() + "</a>");
+		if(player.getFileCredit() != null)
+			dataModel.put("信用报告", "<a href='" + FileUtil.genDownloadUrl(player.getFileCredit().getId()) + "'>" + player.getFileCredit().getName() + "</a>");
+		if(player.getFileOrganizationCode() != null)
+			dataModel.put("组织机构代码证", "<a href='" + FileUtil.genDownloadUrl(player.getFileOrganizationCode().getId()) + "'>" + player.getFileOrganizationCode().getName() + "</a>");
+		if(player.getFileBusinessLicence() != null)
+			dataModel.put("营业执照", "<a href='" + FileUtil.genDownloadUrl(player.getFileBusinessLicence().getId()) + "'>" + player.getFileBusinessLicence().getName() + "</a>");
+		if(player.getFileTaxNumber() != null)
+			dataModel.put("税务登记证", "<a href='" + FileUtil.genDownloadUrl(player.getFileTaxNumber().getId()) + "'>" + player.getFileTaxNumber().getName() + "</a>");
+		if(player.getFileAccountPermit() != null)
+			dataModel.put("开户许可证", "<a href='" + FileUtil.genDownloadUrl(player.getFileAccountPermit().getId()) + "'>" + player.getFileAccountPermit().getName() + "</a>");
 		dataModel.put("最近访问时间", Utils.int2FormatDate(player.getAccessTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
 		dataModel.put("创建时间", Utils.int2FormatDate(player.getCreateTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
 		dataModel.put("登陆时间", Utils.int2FormatDate(player.getLoginTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
