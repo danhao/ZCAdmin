@@ -3,7 +3,6 @@
 	<name>ZCAdmin</name>
 	<comment></comment>
 	<projects>
-		<project>ZCShare</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
