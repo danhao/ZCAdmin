@@ -87,6 +87,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		btn_debt_save.setImage(Constants.BTN_ICON_SAVE);
 		btn_approve.setImage(Constants.BTN_ICON_OK);
 		btn_bidwin.setImage(Constants.BTN_ICON_OK);
+		btn_close.setImage(Constants.BTN_ICON_CLEAR);
 		
 		type.appendItem("代理", "1");
 		type.appendItem("拍卖", "2");
@@ -146,19 +147,33 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	
 	public void onClick$btn_close(Event event) throws Exception {
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()), winnerId.getValue())));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()))));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		
 		if(jsonData != null){
 			if(jsonData.getBoolean("result")){
 				MsgBox.info("操作成功！");
+				
+				debt.setState(Constant.STATE_CLOSED);
+				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
+				int index = lml.indexOf(debt);
+				if (index == -1) {
+					lml.add(0, debt);
+					index = 0;
+				} else {
+					lml.set(index, debt);
+				}
+				listBoxDebt.setSelectedIndex(index);
+				listBoxDebt.invalidate();
+				
 				doClose();
 				return;
 			}
 		}
 		
 		MsgBox.alert("操作失败！");
+		doClose();
 	}
 	
 	private void doClose() throws Exception {

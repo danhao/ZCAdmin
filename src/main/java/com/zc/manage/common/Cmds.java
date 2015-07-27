@@ -10,6 +10,7 @@ public enum Cmds {
 	UPDATE_CASH("1000012", "提现处理"),
 	BID_WIN("1000013", "自动中标"),
 	DEBT_CLOSE("1000014", "结单"),
+	UPDATE_VIP("1000015", "VIP等级"),
 	;
 	private String cmd;
 	private String name;

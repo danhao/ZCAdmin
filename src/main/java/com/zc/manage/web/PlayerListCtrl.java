@@ -17,6 +17,7 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
 import org.zkoss.zul.Listbox;
@@ -51,6 +52,8 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	protected transient Button btn_id;
 	protected transient Button btn_co;
 	protected transient Button btn_clear;
+	
+	protected transient Intbox ib_vip;
 	
 	private Player player;
 	
@@ -120,15 +123,34 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		String pid = getPid();
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.QUERY_PLAYER.getCmd(), pid)));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.QUERY_PLAYER.getCmd(), "0", pid)));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
 		if (!WebUtils.handleJsonResult(obj)) {
 			return;
 		}
 
-		Player player = new Gson().fromJson(obj.toString(),Player.class);
+		player = new Gson().fromJson(obj.toString(),Player.class);
 		refreshData(player);
 	}
+	
+	public void onClick$btn_vip(Event event) throws Exception {
+		if(!canUse()){
+			MsgBox.alert("没有操作权限");
+			return;
+		}
+		int vipLevel = ib_vip.getValue();
+//		if(vipLevel > 10){
+//			MsgBox.alert("vip最大为10级");
+//			return;
+//		}
+		
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_VIP.getCmd(), String.valueOf(player.getId()), String.valueOf(vipLevel))));
+		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
+		if (!WebUtils.handleJsonResult(obj)) {
+			return;
+		}
+	}	
 	
 	public void onClick$btn_id(Event event) throws Exception {
 		doValidate(Constant.USER_ID_VALIDATED);
@@ -139,7 +161,7 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	}
 	
 	public void onClick$btn_clear(Event event) throws Exception {
-		doValidate(-Constant.USER_EMAIL_VALIDATED - Constant.USER_MOBILE_VALIDATED);
+		doValidate(-Constant.USER_ID_VALIDATED - Constant.USER_CO_VALIDATED);
 	}
 
 	private void doValidate(int state) throws Exception{
@@ -178,13 +200,21 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		dataModel.put("余额（分）", String.valueOf(player.getMoney()));
 		dataModel.put("类型", player.getType()==0?"个人":"企业");
 		dataModel.put("角色", player.getRole()==0?"债权人":"追债人");
-		dataModel.put("身份证", "<a href='" + FileUtil.genDownloadUrl(player.getFileId().getId()) + "'>" + player.getFileId().getName() + "</a>");
-		dataModel.put("无犯罪证明", "<a href='" + FileUtil.genDownloadUrl(player.getFileNoneCrime().getId()) + "'>" + player.getFileNoneCrime().getName() + "</a>");
-		dataModel.put("信用报告", "<a href='" + FileUtil.genDownloadUrl(player.getFileCredit().getId()) + "'>" + player.getFileCredit().getName() + "</a>");
-		dataModel.put("组织机构代码证", "<a href='" + FileUtil.genDownloadUrl(player.getFileOrganizationCode().getId()) + "'>" + player.getFileOrganizationCode().getName() + "</a>");
-		dataModel.put("营业执照", "<a href='" + FileUtil.genDownloadUrl(player.getFileBusinessLicence().getId()) + "'>" + player.getFileBusinessLicence().getName() + "</a>");
-		dataModel.put("税务登记证", "<a href='" + FileUtil.genDownloadUrl(player.getFileTaxNumber().getId()) + "'>" + player.getFileTaxNumber().getName() + "</a>");
-		dataModel.put("开户许可证", "<a href='" + FileUtil.genDownloadUrl(player.getFileAccountPermit().getId()) + "'>" + player.getFileAccountPermit().getName() + "</a>");
+		dataModel.put("VIP", String.valueOf(player.getVip()));
+		if(player.getFileId() != null)
+			dataModel.put("身份证", "<a href='" + FileUtil.genDownloadUrl(player.getFileId().getId()) + "'>" + player.getFileId().getName() + "</a>");
+		if(player.getFileNoneCrime() != null)
+			dataModel.put("无犯罪证明", "<a href='" + FileUtil.genDownloadUrl(player.getFileNoneCrime().getId()) + "'>" + player.getFileNoneCrime().getName() + "</a>");
+		if(player.getFileCredit() != null)
+			dataModel.put("信用报告", "<a href='" + FileUtil.genDownloadUrl(player.getFileCredit().getId()) + "'>" + player.getFileCredit().getName() + "</a>");
+		if(player.getFileOrganizationCode() != null)
+			dataModel.put("组织机构代码证", "<a href='" + FileUtil.genDownloadUrl(player.getFileOrganizationCode().getId()) + "'>" + player.getFileOrganizationCode().getName() + "</a>");
+		if(player.getFileBusinessLicence() != null)
+			dataModel.put("营业执照", "<a href='" + FileUtil.genDownloadUrl(player.getFileBusinessLicence().getId()) + "'>" + player.getFileBusinessLicence().getName() + "</a>");
+		if(player.getFileTaxNumber() != null)
+			dataModel.put("税务登记证", "<a href='" + FileUtil.genDownloadUrl(player.getFileTaxNumber().getId()) + "'>" + player.getFileTaxNumber().getName() + "</a>");
+		if(player.getFileAccountPermit() != null)
+			dataModel.put("开户许可证", "<a href='" + FileUtil.genDownloadUrl(player.getFileAccountPermit().getId()) + "'>" + player.getFileAccountPermit().getName() + "</a>");
 		dataModel.put("最近访问时间", Utils.int2FormatDate(player.getAccessTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
 		dataModel.put("创建时间", Utils.int2FormatDate(player.getCreateTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
 		dataModel.put("登陆时间", Utils.int2FormatDate(player.getLoginTime(), Constants.DEFAULT_CREATED_AT_ALL_FORMAT));
