@@ -146,8 +146,11 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_VIP.getCmd(), String.valueOf(player.getId()), String.valueOf(vipLevel))));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
 		if (!WebUtils.handleJsonResult(obj)) {
+			MsgBox.alert("操作失败！");
 			return;
 		}
+		
+		MsgBox.info("操作成功！");
 	}	
 	
 	public void onClick$btn_email(Event event) throws Exception {
@@ -160,8 +163,10 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_EMAIL.getCmd(), String.valueOf(player.getId()), ib_email.getValue())));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
 		if (!WebUtils.handleJsonResult(obj)) {
+			MsgBox.alert("操作失败！");
 			return;
 		}
+		MsgBox.info("操作成功！");
 	}
 	
 	public void onClick$btn_mobile(Event event) throws Exception {
@@ -174,8 +179,10 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_MOBILE.getCmd(), String.valueOf(player.getId()), String.valueOf(ib_mobile.getValue()))));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
 		if (!WebUtils.handleJsonResult(obj)) {
+			MsgBox.alert("操作失败！");
 			return;
 		}
+		MsgBox.info("操作成功！");
 	}
 	
 	public void onClick$btn_id(Event event) throws Exception {
