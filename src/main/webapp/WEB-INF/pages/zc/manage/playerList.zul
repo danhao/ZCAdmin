@@ -25,6 +25,8 @@
 									<tabs>
 										<tab label="属性" id="sg_tab_profile" />
 										<tab label="vip等级" id="sg_tab_vip" />
+										<tab label="Email" id="sg_tab_email" />
+										<tab label="手机号" id="sg_tab_mobile" />
 									</tabs>
 									<tabpanels style="padding:0px;" id="sg_tps">
 										<tabpanel style="padding:0px;overflow:auto;" id="sg_tabpanel_profile">
@@ -59,6 +61,50 @@
 												</grid>
 											</div>
 										</tabpanel>										
+										<tabpanel style="padding:0px;" id="sg_tabpanel_email">
+											<div sclass="div_center">
+												<grid fixedLayout="true">
+													<columns>
+														<column label="项目" width="120px" />
+														<column label="内容" />
+													</columns>
+													<rows>
+														<row>
+															Email：
+															<textbox id="ib_email" width="120px" constraint="no empty" />
+														</row>
+														<row>
+															<span></span>
+															<hbox>
+																<button id="btn_email" label="确定" />
+															</hbox>
+														</row>
+													</rows>
+												</grid>
+											</div>
+										</tabpanel>	
+										<tabpanel style="padding:0px;" id="sg_tabpanel_mobile">
+											<div sclass="div_center">
+												<grid fixedLayout="true">
+													<columns>
+														<column label="项目" width="120px" />
+														<column label="内容" />
+													</columns>
+													<rows>
+														<row>
+															手机号：
+															<textbox id="ib_mobile" width="120px" constraint="no negative, no empty" />
+														</row>
+														<row>
+															<span></span>
+															<hbox>
+																<button id="btn_mobile" label="确定" />
+															</hbox>
+														</row>
+													</rows>
+												</grid>
+											</div>
+										</tabpanel>																				
 									</tabpanels>
 								</tabbox>
 							</div>

@@ -11,6 +11,8 @@ public enum Cmds {
 	BID_WIN("1000013", "自动中标"),
 	DEBT_CLOSE("1000014", "结单"),
 	UPDATE_VIP("1000015", "VIP等级"),
+	UPDATE_EMAIL("1000017", "修改Email"),
+	UPDATE_MOBILE("1000018", "修改手机号"),
 	;
 	private String cmd;
 	private String name;

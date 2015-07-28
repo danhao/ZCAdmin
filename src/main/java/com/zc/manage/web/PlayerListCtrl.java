@@ -54,6 +54,8 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	protected transient Button btn_clear;
 	
 	protected transient Intbox ib_vip;
+	protected transient Textbox ib_email;
+	protected transient Intbox ib_mobile;
 	
 	private Player player;
 	
@@ -139,10 +141,6 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 			return;
 		}
 		int vipLevel = ib_vip.getValue();
-//		if(vipLevel > 10){
-//			MsgBox.alert("vip最大为10级");
-//			return;
-//		}
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_VIP.getCmd(), String.valueOf(player.getId()), String.valueOf(vipLevel))));
@@ -151,6 +149,34 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 			return;
 		}
 	}	
+	
+	public void onClick$btn_email(Event event) throws Exception {
+		if(!canUse()){
+			MsgBox.alert("没有操作权限");
+			return;
+		}
+		
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_EMAIL.getCmd(), String.valueOf(player.getId()), ib_email.getValue())));
+		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
+		if (!WebUtils.handleJsonResult(obj)) {
+			return;
+		}
+	}
+	
+	public void onClick$btn_mobile(Event event) throws Exception {
+		if(!canUse()){
+			MsgBox.alert("没有操作权限");
+			return;
+		}
+		
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_MOBILE.getCmd(), String.valueOf(player.getId()), String.valueOf(ib_mobile.getValue()))));
+		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
+		if (!WebUtils.handleJsonResult(obj)) {
+			return;
+		}
+	}
 	
 	public void onClick$btn_id(Event event) throws Exception {
 		doValidate(Constant.USER_ID_VALIDATED);
