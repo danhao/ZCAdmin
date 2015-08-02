@@ -12,6 +12,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
@@ -21,6 +22,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -32,8 +34,10 @@ import com.zc.common.web.util.MsgBox;
 import com.zc.common.web.util.UserWorkspace;
 import com.zc.common.web.util.WebUtils;
 import com.zc.manage.common.Cmds;
+import com.zc.manage.web.renderer.FileRenderer;
 import com.zc.manage.web.renderer.PlayerRenderer;
 import com.zc.web.core.Constant;
+import com.zc.web.data.model.File;
 import com.zc.web.data.model.Player;
 import com.zc.web.util.FileUtil;
 
@@ -62,6 +66,9 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	protected transient Listbox listBoxValidate;
 	
 	protected transient Grid gd_player;	
+	
+	protected transient Listbox listBoxFile;
+	
 	private boolean isAdmin;
 	
 	public PlayerListCtrl() {
@@ -131,8 +138,16 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 			return;
 		}
 
-		player = new Gson().fromJson(obj.toString(),Player.class);
+		player = new Gson().fromJson(obj.getString("data"),Player.class);
 		refreshData(player);
+	}
+	
+	public void onFileListItemDoubleClicked(Event event) throws Exception {
+		Listitem item = listBoxFile.getSelectedItem();
+		if (item != null) {
+			File file = (File) item.getAttribute(Constants.DATA);
+			Executions.createComponents("http://www.baidu.com", null, null);
+		}
 	}
 	
 	public void onClick$btn_vip(Event event) throws Exception {
@@ -256,6 +271,9 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 
 		gd_player.setRowRenderer(new PlayerRenderer());
 		gd_player.setModel(new ListModelMap(dataModel));
+		
+		listBoxFile.setItemRenderer(new FileRenderer());
+		listBoxFile.setModel(new ListModelList(player.getFiles()));
 	}
 	
 	private String getPid() throws Exception {

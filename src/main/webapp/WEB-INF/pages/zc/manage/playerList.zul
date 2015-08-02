@@ -27,6 +27,7 @@
 										<tab label="vip等级" id="sg_tab_vip" />
 										<tab label="Email" id="sg_tab_email" />
 										<tab label="手机号" id="sg_tab_mobile" />
+										<tab label="上传文件" id="sg_tab_file" />
 									</tabs>
 									<tabpanels style="padding:0px;" id="sg_tps">
 										<tabpanel style="padding:0px;overflow:auto;" id="sg_tabpanel_profile">
@@ -104,7 +105,21 @@
 													</rows>
 												</grid>
 											</div>
-										</tabpanel>																				
+										</tabpanel>		
+										<tabpanel style="padding:0px;" id="sg_tabpanel_file">
+											<div sclass="div_center">
+												<listbox id="listBoxFile" multiple="true" checkmark="true" height="450px">
+													<listhead>
+														<listheader label="文件"/>
+														<listheader label="创建时间" />
+														<listheader label="状态" />
+													</listhead>
+												</listbox>
+												<hbox id="hbox_tool1" align="end">
+													<button id="btn_file_done" label="已处理" tooltiptext="已处理" />
+												</hbox>
+											</div>
+										</tabpanel>																													
 									</tabpanels>
 								</tabbox>
 							</div>

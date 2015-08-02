@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Html;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Textbox;
@@ -28,6 +29,7 @@ import com.zc.common.web.util.GFCBaseCtrl;
 import com.zc.common.web.util.MsgBox;
 import com.zc.common.web.util.WebUtils;
 import com.zc.manage.common.Cmds;
+import com.zc.manage.web.renderer.RepaymentRenderer;
 import com.zc.web.core.Constant;
 import com.zc.web.data.model.Debt;
 import com.zc.web.data.model.File;
@@ -44,7 +46,11 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Button btn_cancel;
 	protected transient Button btn_bidwin;
 	protected transient Button btn_close;
+	protected transient Button btn_admin_close;
+	protected transient Button btn_repayment;
 	protected transient Caption cp_title;
+	
+	protected transient Listbox listBoxRepayment;
 
 	protected transient Textbox id; //id
 	protected transient Textbox money;
@@ -76,6 +82,9 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Html creditorFileId;
 	protected transient Html files;
 	
+	protected transient Intbox repayMoney;
+	protected transient Textbox repayMemo;
+	
 	private Map<String, String> changeMap = new HashMap<String, String>();
 	
 	public DebtDetailCtrl() {
@@ -88,6 +97,8 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		btn_approve.setImage(Constants.BTN_ICON_OK);
 		btn_bidwin.setImage(Constants.BTN_ICON_OK);
 		btn_close.setImage(Constants.BTN_ICON_CLEAR);
+		btn_admin_close.setImage(Constants.BTN_ICON_DELETE);
+		btn_repayment.setImage(Constants.BTN_ICON_ADD);
 		
 		type.appendItem("代理", "1");
 		type.appendItem("拍卖", "2");
@@ -108,6 +119,12 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		btn_approve.setVisible(this.debt.getState() == Constant.STATE_NEW);
 		btn_bidwin.setVisible(this.debt.getState() == Constant.STATE_PUBLISH);
 		btn_close.setVisible(this.debt.getState() == Constant.STATE_DEALED && this.debt.getType() == Constant.TYPE_DEPUTY);
+		btn_repayment.setVisible(this.debt.getState() == Constant.STATE_DEALED && this.debt.getType() == Constant.TYPE_DEPUTY);
+		btn_admin_close.setVisible(this.debt.getState() != Constant.STATE_CLOSED);
+		
+		listBoxRepayment.setItemRenderer(new RepaymentRenderer());
+		listBoxRepayment.setModel(new ListModelList(debt.getRepayments()));
+		
 		doShowDialog(getDebt());
 	}
 
@@ -175,6 +192,69 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		MsgBox.alert("操作失败！");
 		doClose();
 	}
+	
+	public void onClick$btn_admin_close(Event event) throws Exception {
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADMIN_CLOSE_DEBT.getCmd(), "0", String.valueOf(debt.getId()))));
+		
+		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
+		
+		if(jsonData != null){
+			if(jsonData.getBoolean("result")){
+				MsgBox.info("操作成功！");
+				
+				debt.setState(Constant.STATE_CLOSED);
+				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
+				int index = lml.indexOf(debt);
+				if (index == -1) {
+					lml.add(0, debt);
+					index = 0;
+				} else {
+					lml.set(index, debt);
+				}
+				listBoxDebt.setSelectedIndex(index);
+				listBoxDebt.invalidate();
+				
+				doClose();
+				return;
+			}
+		}
+		
+		MsgBox.alert("操作失败！");
+		doClose();
+	}
+	
+	public void onClick$btn_repayment(Event event) throws Exception {
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), repayMoney.getValue().toString(), repayMemo.getValue())));
+		
+		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
+		
+		if(jsonData != null){
+			if(jsonData.getBoolean("result")){
+				Debt debt = new Gson().fromJson(jsonData.getString("data"),Debt.class);
+				this.debt.setRepayments(debt.getRepayments());
+
+				listBoxRepayment.setModel(new ListModelList(debt.getRepayments()));
+				listBoxRepayment.invalidate();
+				
+				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
+				int index = lml.indexOf(this.debt);
+				if (index == -1) {
+					lml.add(0, this.debt);
+					index = 0;
+				} else {
+					lml.set(index, this.debt);
+				}
+				listBoxDebt.setSelectedIndex(index);
+				listBoxDebt.invalidate();
+
+				return;
+			}
+		}
+		
+		MsgBox.alert("操作失败！");
+	}	
 	
 	private void doClose() throws Exception {
 		debtDialogWindow.onClose();

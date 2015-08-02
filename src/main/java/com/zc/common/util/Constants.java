@@ -73,6 +73,7 @@ public abstract class Constants {
 	public static final String BTN_ICON_NO = BTN_ICON_PATH + "btn_no.gif";
 	public static final String BTN_ICON_CANCEL = BTN_ICON_PATH + "btn_cancel.png";
 	public static final String BTN_ICON_EXCEL = BTN_ICON_PATH + "btn_excel.png";
+	public static final String BTN_ICON_ADD = BTN_ICON_PATH + "add.png";
 
 	public static final String HLZY_SEARCH_ITEM_PAGE_URL = "/WEB-INF/pages/hlzy/manage/searchItem.zul";
 	public static final String ZHSH_SEARCH_ITEM_PAGE_URL = "/WEB-INF/pages/zhsh/manage/searchItem.zul";

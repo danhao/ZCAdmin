@@ -6,6 +6,13 @@
 		<borderlayout>
 			<center border="none" autoscroll="true">
 				<div>
+		<tabbox height="100%" id="tabbox_playerInfo">
+			<tabs>
+				<tab label="属性" id="sg_tab_profile" />
+				<tab label="还款记录" id="sg_tab_return" />
+			</tabs>
+			<tabpanels style="padding:0px;" id="sg_tps">
+				<tabpanel style="padding:0px;overflow:auto;" id="sg_tabpanel_profile">
 					<grid fixedLayout="true">
 						<columns>
 							<column label="项目" width="120px" />
@@ -43,6 +50,25 @@
 							<row>状态：<listbox id="state" mold="select"/></row>
 						</rows>
 					</grid>
+				</tabpanel>
+				<tabpanel style="padding:0px;overflow:auto" id="sg_tabpanel_return">
+					<listbox id="listBoxRepayment" multiple="true" checkmark="false" height="350px">
+						<listhead>
+							<listheader label="时间" width="150px"/>
+							<listheader label="金额（分）" />
+							<listheader label="说明" />
+						</listhead>
+					</listbox>
+					<hbox>
+						<label value="金额：" />
+						<intbox id="repayMoney" constraint="no empty;no negative"/>
+						<label value="说明：" />
+						<textbox id="repayMemo" value=""/>
+					</hbox>
+					<button id="btn_repayment" label="增加回款记录" tooltiptext="增加回款记录" />
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
 				</div>
 			</center>
 			<south border="none" margins="0,0,0,0">
@@ -51,6 +77,7 @@
 					<button id="btn_approve" label="通过" tooltiptext="审批通过" />
 					<button id="btn_bidwin" label="中标" tooltiptext="智能中标" />
 					<button id="btn_close" label="结单" tooltiptext="完成并转款" />
+					<button id="btn_admin_close" label="撤单" tooltiptext="撤单" />
 					<button id="btn_cancel"  label="取消" />
 				</toolbar>
 			</south>

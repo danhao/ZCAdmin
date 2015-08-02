@@ -13,6 +13,8 @@ public enum Cmds {
 	UPDATE_VIP("1000015", "VIP等级"),
 	UPDATE_EMAIL("1000017", "修改Email"),
 	UPDATE_MOBILE("1000018", "修改手机号"),
+	ADD_REPAYMENT("1000019", "回款记录"),
+	ADMIN_CLOSE_DEBT("1000021", "撤单"),
 	;
 	private String cmd;
 	private String name;
