@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
@@ -12,16 +13,17 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -37,7 +39,6 @@ import com.zc.manage.common.Cmds;
 import com.zc.manage.web.renderer.FileRenderer;
 import com.zc.manage.web.renderer.PlayerRenderer;
 import com.zc.web.core.Constant;
-import com.zc.web.data.model.File;
 import com.zc.web.data.model.Player;
 import com.zc.web.util.FileUtil;
 
@@ -56,6 +57,7 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	protected transient Button btn_id;
 	protected transient Button btn_co;
 	protected transient Button btn_clear;
+	protected transient Button btn_file_done;
 	
 	protected transient Intbox ib_vip;
 	protected transient Textbox ib_email;
@@ -142,14 +144,6 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		refreshData(player);
 	}
 	
-	public void onFileListItemDoubleClicked(Event event) throws Exception {
-		Listitem item = listBoxFile.getSelectedItem();
-		if (item != null) {
-			File file = (File) item.getAttribute(Constants.DATA);
-			Executions.createComponents("http://www.baidu.com", null, null);
-		}
-	}
-	
 	public void onClick$btn_vip(Event event) throws Exception {
 		if(!canUse()){
 			MsgBox.alert("没有操作权限");
@@ -210,6 +204,25 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 	
 	public void onClick$btn_clear(Event event) throws Exception {
 		doValidate(-Constant.USER_ID_VALIDATED - Constant.USER_CO_VALIDATED);
+	}
+
+	public void onClick$btn_file_done(Event event) throws Exception {
+		Set<Listitem> li = listBoxFile.getSelectedItems();
+		String s = "";
+		for (Listitem listitem : li) {
+			s += (String)listitem.getValue() + "_";
+		}
+		
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.UPDATE_USER_FILE.getCmd(), String.valueOf(player.getId()), s)));
+		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
+		if (!WebUtils.handleJsonResult(jsonData)) {
+			MsgBox.alert("操作失败！");
+			return;
+		}
+		
+		player = new Gson().fromJson(jsonData.getString("data"),Player.class);
+		refreshData(player);
 	}
 
 	private void doValidate(int state) throws Exception{

@@ -15,6 +15,7 @@ public enum Cmds {
 	UPDATE_MOBILE("1000018", "修改手机号"),
 	ADD_REPAYMENT("1000019", "回款记录"),
 	ADMIN_CLOSE_DEBT("1000021", "撤单"),
+	UPDATE_USER_FILE("1000022", "更新状态"),
 	;
 	private String cmd;
 	private String name;
