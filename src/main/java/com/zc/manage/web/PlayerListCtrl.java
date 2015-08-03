@@ -136,7 +136,8 @@ public class PlayerListCtrl  extends GFCBasePagingCtrl{
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.QUERY_PLAYER.getCmd(), "0", pid)));
 		JSONObject obj = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);
-		if (!WebUtils.handleJsonResult(obj)) {
+		if (!WebUtils.handleJsonResult(obj) || obj.getString("data") == null) {
+			MsgBox.alert("未找到用户！");
 			return;
 		}
 
