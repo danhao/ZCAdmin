@@ -20,6 +20,7 @@ import org.zkoss.zul.Html;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -163,6 +164,10 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 	
 	public void onClick$btn_close(Event event) throws Exception {
+		if(MsgBox.show("确定本单结束，需要结单吗？", "关闭确认", Messagebox.OK + Messagebox.CANCEL, Messagebox.QUESTION) != Messagebox.OK){
+			return;
+		}
+		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()))));
 		
@@ -194,6 +199,10 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 	
 	public void onClick$btn_admin_close(Event event) throws Exception {
+		if(MsgBox.show("确定要关闭本单吗？", "关闭确认", Messagebox.OK + Messagebox.CANCEL, Messagebox.QUESTION) != Messagebox.OK){
+			return;
+		}
+		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADMIN_CLOSE_DEBT.getCmd(), "0", String.valueOf(debt.getId()))));
 		
