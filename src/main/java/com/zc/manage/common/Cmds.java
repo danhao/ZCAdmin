@@ -16,6 +16,8 @@ public enum Cmds {
 	ADD_REPAYMENT("1000019", "回款记录"),
 	ADMIN_CLOSE_DEBT("1000021", "撤单"),
 	UPDATE_USER_FILE("1000022", "更新状态"),
+	LIST_APPLY_DEBT_END("1000023", "申请列表"),
+	GET_DEBT("1000024", "查看债务"),
 	;
 	private String cmd;
 	private String name;

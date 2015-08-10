@@ -178,16 +178,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 				MsgBox.info("操作成功！");
 				
 				debt.setState(Constant.STATE_CLOSED);
-				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
-				int index = lml.indexOf(debt);
-				if (index == -1) {
-					lml.add(0, debt);
-					index = 0;
-				} else {
-					lml.set(index, debt);
-				}
-				listBoxDebt.setSelectedIndex(index);
-				listBoxDebt.invalidate();
+				updateList();
 				
 				doClose();
 				return;
@@ -213,17 +204,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 				MsgBox.info("操作成功！");
 				
 				debt.setState(Constant.STATE_CLOSED);
-				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
-				int index = lml.indexOf(debt);
-				if (index == -1) {
-					lml.add(0, debt);
-					index = 0;
-				} else {
-					lml.set(index, debt);
-				}
-				listBoxDebt.setSelectedIndex(index);
-				listBoxDebt.invalidate();
-				
+				updateList();
 				doClose();
 				return;
 			}
@@ -247,16 +228,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 				listBoxRepayment.setModel(new ListModelList(debt.getRepayments()));
 				listBoxRepayment.invalidate();
 				
-				ListModelList lml = (ListModelList) listBoxDebt.getListModel();
-				int index = lml.indexOf(this.debt);
-				if (index == -1) {
-					lml.add(0, this.debt);
-					index = 0;
-				} else {
-					lml.set(index, this.debt);
-				}
-				listBoxDebt.setSelectedIndex(index);
-				listBoxDebt.invalidate();
+				updateList();
 
 				return;
 			}
@@ -293,19 +265,26 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 				}
 			}			
 			
-			ListModelList lml = (ListModelList) listBoxDebt.getListModel();
-			int index = lml.indexOf(debt);
-			if (index == -1) {
-				lml.add(0, debt);
-				index = 0;
-			} else {
-				lml.set(index, debt);
-			}
-			listBoxDebt.setSelectedIndex(index);
-			listBoxDebt.invalidate();
+			updateList();
 		}
 		
 		doClose();
+	}
+	
+	private void updateList(){
+		if(listBoxDebt == null)
+			return;
+		
+		ListModelList lml = (ListModelList) listBoxDebt.getListModel();
+		int index = lml.indexOf(debt);
+		if (index == -1) {
+			lml.add(0, debt);
+			index = 0;
+		} else {
+			lml.set(index, debt);
+		}
+		listBoxDebt.setSelectedIndex(index);
+		listBoxDebt.invalidate();		
 	}
 
 	public void doShowDialog(Debt debt) throws Exception {
