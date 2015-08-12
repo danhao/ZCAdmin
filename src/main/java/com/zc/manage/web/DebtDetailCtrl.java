@@ -312,7 +312,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		winnerId.setValue(String.valueOf(debt.getWinnerId()));	// 获单人
 		winnerName.setValue(String.valueOf(debt.getWinnerName()));
 		creditorName.setValue(String.valueOf(debt.getCreditorName()));
-//		creditorFileId.setContent("<a href='" + FileUtil.genDownloadUrl(debt.getCreditorFileId().getId()) + "'>" + debt.getCreditorFileId().getName() + "</a>");
+		creditorFileId.setContent("<a href='" + FileUtil.genDownloadUrl(debt.getCreditorFileId().getId()) + "'>" + debt.getCreditorFileId().getName() + "</a>");
 		debtorName.setValue(String.valueOf(debt.getDebtorName()));
 		debtorPhone.setValue(String.valueOf(debt.getDebtorPhone()));
 		debtorId.setValue(String.valueOf(debt.getDebtorId()));
