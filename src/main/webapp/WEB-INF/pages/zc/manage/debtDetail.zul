@@ -1,7 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link  rel="stylesheet" type="text/css" href="/styles/main.css"?>
 <zk>
-	<window id="debtDialogWindow" title="债务管理" border="normal" width="400px" height="500px" apply="com.zc.manage.web.DebtDetailCtrl" closable="true">
+	<window id="debtDialogWindow" title="债务管理" border="normal" width="500px" height="500px" apply="com.zc.manage.web.DebtDetailCtrl" closable="true">
 		<caption id="cp_title"/>
 		<borderlayout>
 			<center border="none" autoscroll="true">
@@ -62,7 +62,7 @@
 					<hbox>
 						<label value="金额：" />
 						<intbox id="repayMoney" constraint="no empty;no negative"/>
-						<label value="说明：" />
+						<label value="说明：" width="120px"/>
 						<textbox id="repayMemo" value=""/>
 					</hbox>
 					<button id="btn_repayment" label="增加回款记录" tooltiptext="增加回款记录" />
