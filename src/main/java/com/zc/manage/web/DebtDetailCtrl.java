@@ -215,6 +215,10 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 	
 	public void onClick$btn_repayment(Event event) throws Exception {
+		if(MsgBox.show("确定要增加一条还款记录吗？金额为" + repayMoney.getValue(), "确认", Messagebox.OK + Messagebox.CANCEL, Messagebox.QUESTION) != Messagebox.OK){
+			return;
+		}
+		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), String.valueOf((int)(repayMoney.getValue() * 100)), repayMemo.getValue())));
 		
