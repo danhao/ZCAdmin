@@ -61,7 +61,7 @@
 					</listbox>
 					<hbox>
 						<label value="金额：" />
-						<intbox id="repayMoney" constraint="no empty;no negative"/>
+						<doublebox id="repayMoney" constraint="no empty;no negative"/>
 						<label value="说明：" width="120px"/>
 						<textbox id="repayMemo" value=""/>
 					</hbox>

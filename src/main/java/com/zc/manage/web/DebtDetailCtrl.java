@@ -16,8 +16,8 @@ import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Html;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -83,7 +83,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Html creditorFileId;
 	protected transient Html files;
 	
-	protected transient Intbox repayMoney;
+	protected transient Doublebox repayMoney;
 	protected transient Textbox repayMemo;
 	
 	private Map<String, String> changeMap = new HashMap<String, String>();
