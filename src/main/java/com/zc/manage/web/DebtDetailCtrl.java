@@ -216,7 +216,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	
 	public void onClick$btn_repayment(Event event) throws Exception {
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), repayMoney.getValue().toString(), repayMemo.getValue())));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), String.valueOf((int)(repayMoney.getValue() * 100)), repayMemo.getValue())));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		

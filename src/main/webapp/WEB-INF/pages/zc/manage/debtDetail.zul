@@ -55,7 +55,7 @@
 					<listbox id="listBoxRepayment" multiple="true" checkmark="false" height="350px">
 						<listhead>
 							<listheader label="时间" width="150px"/>
-							<listheader label="金额（分）" />
+							<listheader label="金额（元）" />
 							<listheader label="说明" />
 						</listhead>
 					</listbox>
