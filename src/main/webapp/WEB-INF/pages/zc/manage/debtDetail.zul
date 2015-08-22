@@ -35,6 +35,8 @@
 							<row>债权人身份证：<html id="creditorFileId" /></row>
 							<row>债务人名称：<textbox id="debtorName" value="" /></row>
 							<row>债务人电话：<textbox id="debtorPhone" value="" /></row>
+							<row>债务人家庭电话：<textbox id="debtorHomePhone" value="" /></row>
+							<row>债务人公司电话：<textbox id="debtorCorpPhone" value="" /></row>
 							<row>债务人身份证号：<textbox id="debtorId" value="" /></row>
 							<row>地区/城市/区：<textbox id="debtorLocation" value="" /></row>
 							<row>详细地址：<textbox id="debtorAddr" value="" /></row>

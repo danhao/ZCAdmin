@@ -33,6 +33,7 @@ import com.zc.manage.common.Cmds;
 import com.zc.manage.web.renderer.RepaymentRenderer;
 import com.zc.web.core.Constant;
 import com.zc.web.data.model.Debt;
+import com.zc.web.data.model.Debt.Contact;
 import com.zc.web.data.model.File;
 import com.zc.web.util.FileUtil;
 
@@ -68,6 +69,8 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Textbox winnerName;
 	protected transient Textbox debtorName;
 	protected transient Textbox debtorPhone;
+	protected transient Textbox debtorHomePhone;
+	protected transient Textbox debtorCorpPhone;
 	protected transient Textbox debtorId;
 	protected transient Textbox debtorLocation;
 	protected transient Textbox debtorAddr;
@@ -314,7 +317,21 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		creditorName.setValue(String.valueOf(debt.getCreditorName()));
 		creditorFileId.setContent("<a href='" + FileUtil.genDownloadUrl(debt.getCreditorFileId().getId()) + "'>" + debt.getCreditorFileId().getName() + "</a>");
 		debtorName.setValue(String.valueOf(debt.getDebtorName()));
-		debtorPhone.setValue(String.valueOf(debt.getDebtorPhone()));
+		
+		for(Contact contact : debt.getContacts()){
+			switch(contact.getType()){
+			case 1:
+				debtorPhone.setValue(String.valueOf(contact.getPhone()));
+				break;
+			case 2:
+				debtorHomePhone.setValue(String.valueOf(contact.getPhone()));
+				break;
+			case 3:
+				debtorCorpPhone.setValue(String.valueOf(contact.getPhone()));
+				break;
+			}
+		}
+		
 		debtorId.setValue(String.valueOf(debt.getDebtorId()));
 		debtorLocation.setValue(String.valueOf(debt.getDebtorLocation()));
 		debtorAddr.setValue(String.valueOf(debt.getDebtorAddr()));
