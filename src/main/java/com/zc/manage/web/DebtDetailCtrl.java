@@ -16,8 +16,8 @@ import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Html;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
@@ -86,7 +86,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Html creditorFileId;
 	protected transient Html files;
 	
-	protected transient Intbox repayMoney;
+	protected transient Doublebox repayMoney;
 	protected transient Textbox repayMemo;
 	
 	private Map<String, String> changeMap = new HashMap<String, String>();
@@ -218,8 +218,12 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 	
 	public void onClick$btn_repayment(Event event) throws Exception {
+		if(MsgBox.show("确定要增加一条还款记录吗？金额为" + repayMoney.getValue(), "确认", Messagebox.OK + Messagebox.CANCEL, Messagebox.QUESTION) != Messagebox.OK){
+			return;
+		}
+		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), repayMoney.getValue().toString(), repayMemo.getValue())));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.ADD_REPAYMENT.getCmd(), "0", String.valueOf(debt.getId()), String.valueOf((int)(repayMoney.getValue() * 100)), repayMemo.getValue())));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		

@@ -1,7 +1,6 @@
 package com.zc.manage.web.renderer;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.zkoss.zk.ui.sys.ComponentsCtrl;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
@@ -16,7 +15,7 @@ public class RepaymentRenderer implements ListitemRenderer {
 		Listcell lc = new Listcell(DateFormatUtils.format(pay.getTime() * 1000L, Constants.DEFAULT_CREATED_AT_FORMAT));
 		lc.setParent(item);
 
-		lc = new Listcell(String.valueOf(pay.getMoney()));
+		lc = new Listcell(String.valueOf(pay.getMoney() / 100f));
 		lc.setParent(item);
 
 		lc = new Listcell(pay.getMemo());
