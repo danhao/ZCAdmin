@@ -92,10 +92,11 @@ public abstract class Constants {
 	public static Map<String, String> DEBT_STATE = new LinkedHashMap<String, String>();
 	static{
 		DEBT_STATE.put("0", "未审核");
-		DEBT_STATE.put("1", "已通过");
-		DEBT_STATE.put("2", "未通过");
-		DEBT_STATE.put("3", "已成交");
-		DEBT_STATE.put("4", "已完成");
+		DEBT_STATE.put("1", "审核中");
+		DEBT_STATE.put("2", "已通过");
+		DEBT_STATE.put("3", "未通过");
+		DEBT_STATE.put("4", "已成交");
+		DEBT_STATE.put("5", "已完成");
 	}
 	
 	public static Map<String, String> CASH_STATE = new LinkedHashMap<String, String>();

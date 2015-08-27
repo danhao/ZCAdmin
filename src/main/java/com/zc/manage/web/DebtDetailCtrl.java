@@ -122,12 +122,17 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		listBoxDebt = (args.containsKey("listBoxDebt")) ? (Listbox) args.get("listBoxDebt") : null;
 		btn_approve.setVisible(this.debt.getState() == Constant.STATE_NEW);
 		btn_bidwin.setVisible(this.debt.getState() == Constant.STATE_PUBLISH);
-		btn_close.setVisible(this.debt.getState() == Constant.STATE_DEALED && this.debt.getType() == Constant.TYPE_DEPUTY);
+		btn_close.setVisible(this.debt.getState() == Constant.STATE_DEALED);
 		btn_repayment.setVisible(this.debt.getState() == Constant.STATE_DEALED && this.debt.getType() == Constant.TYPE_DEPUTY);
 		btn_admin_close.setVisible(this.debt.getState() != Constant.STATE_CLOSED);
 		
 		listBoxRepayment.setItemRenderer(new RepaymentRenderer());
 		listBoxRepayment.setModel(new ListModelList(debt.getRepayments()));
+		
+		if(debt.getState() == Constant.STATE_NEW){
+			changeMap.put("state", String.valueOf(Constant.STATE_VALIDATING));
+			doSave();
+		}
 		
 		doShowDialog(getDebt());
 	}
@@ -142,11 +147,13 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 
 	public void onClick$btn_debt_save(Event event) throws Exception {
 		doSave();
+		doClose();
 	}
 	
 	public void onClick$btn_approve(Event event) throws Exception {
-		changeMap.put("state", "1");
+		changeMap.put("state", "2");
 		doSave();
+		doClose();
 	}
 	
 	public void onClick$btn_bidwin(Event event) throws Exception {
@@ -172,7 +179,10 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		}
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()))));
+		if(debt.getType() == Constant.TYPE_BID)
+			qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE_BID.getCmd(), "0", String.valueOf(debt.getId()))));
+		else
+			qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.DEBT_CLOSE.getCmd(), "0", String.valueOf(debt.getId()))));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		
@@ -274,8 +284,6 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 			
 			updateList();
 		}
-		
-		doClose();
 	}
 	
 	private void updateList(){
