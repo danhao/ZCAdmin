@@ -49,7 +49,7 @@
 							<row>审核通过正式发布时间：<textbox id="publishTime" value="" readonly="true"/></row>
 							<row>创建时间：<textbox id="createTime" value="" readonly="true"/></row>
 							<row>结束时间：<textbox id="endTime" value="" readonly="true"/></row>
-							<row>状态：<listbox id="state" mold="select" readonly="true"/></row>
+							<row>状态：<listbox id="state" mold="select" disabled="true"/></row>
 						</rows>
 					</grid>
 				</tabpanel>
