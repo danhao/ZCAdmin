@@ -13,10 +13,10 @@ public class DebtRenderer implements ListitemRenderer {
 
 	public void render(Listitem item, Object data) throws Exception {
 		Debt debt = (Debt) data;
-		Listcell lc = new Listcell(String.valueOf(debt.getId() / 100f));
+		Listcell lc = new Listcell(String.valueOf(debt.getId()));
 		lc.setParent(item);
 
-		lc = new Listcell(String.valueOf(debt.getMoney()));
+		lc = new Listcell(String.valueOf(debt.getMoney() / 100f));
 		lc.setParent(item);
 
 		lc = new Listcell(debt.getType() == 1 ? "代理" : "拍卖");
