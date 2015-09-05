@@ -22,7 +22,7 @@ public class DebtRenderer implements ListitemRenderer {
 		lc = new Listcell(debt.getType() == 1 ? "代理" : "拍卖");
 		lc.setParent(item);
 
-		lc = new Listcell(debt.getType() == 1 ? debt.getRate() + "": debt.getPrice() + "");
+		lc = new Listcell(debt.getType() == 1 ? debt.getRate() + "": (debt.getPrice() / 100L) + "");
 		lc.setParent(item);
 
 		lc = new Listcell(debt.getDuration() + "天");
