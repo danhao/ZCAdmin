@@ -18,7 +18,7 @@
 					<listbox id="listBoxDebt" multiple="true" checkmark="true">
 						<listhead>
 							<listheader id="lh_id" label="id"  width="180px"/>
-							<listheader label="价格（分）" />
+							<listheader label="价格" />
 							<listheader label="类型" />
 							<listheader label="起拍价格/代理费率"  width="150px"/>
 							<listheader label="代理期限" />

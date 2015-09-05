@@ -314,14 +314,14 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	public void doInitComponents(Debt debt) {
 		cp_title.setLabel((debt.getId() > 0) ? "编辑" : "新增");
 		id.setValue(String.valueOf(debt.getId()));
-		money.setValue(String.valueOf(debt.getMoney()));
+		money.setValue(String.valueOf(debt.getMoney() / 100f));
 		type.setSelectedIndex(debt.getType() - 1);
-		price.setValue(String.valueOf(debt.getPrice()));
+		price.setValue(String.valueOf(debt.getPrice() / 100f));
 		rate.setValue(String.valueOf(debt.getRate()));
 		duration.setValue(String.valueOf(debt.getDuration()));
 		expireDays.setValue(String.valueOf(debt.getExpireDays()));
 		state.setSelectedIndex(debt.getState());	// 0未审核；1已通过；2未通过；3已成交；4已完成；
-		bidIncrease.setValue(String.valueOf(debt.getBidIncrease()));	// 加价幅度
+		bidIncrease.setValue(String.valueOf(debt.getBidIncrease() / 100f));	// 加价幅度
 		ownerId.setValue(String.valueOf(debt.getOwnerId()));	// 发布人
 		ownerName.setValue(String.valueOf(debt.getOwnerName()));
 		winnerId.setValue(String.valueOf(debt.getWinnerId()));	// 获单人

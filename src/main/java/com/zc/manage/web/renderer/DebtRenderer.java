@@ -13,7 +13,7 @@ public class DebtRenderer implements ListitemRenderer {
 
 	public void render(Listitem item, Object data) throws Exception {
 		Debt debt = (Debt) data;
-		Listcell lc = new Listcell(String.valueOf(debt.getId()));
+		Listcell lc = new Listcell(String.valueOf(debt.getId() / 100f));
 		lc.setParent(item);
 
 		lc = new Listcell(String.valueOf(debt.getMoney()));
