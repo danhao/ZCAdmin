@@ -113,7 +113,7 @@ public class ApplyDebtEndListCtrl extends GFCBasePagingCtrl {
 
 	private void showDetailView(DebtEndApply apply) throws Exception {
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.GET_DEBT.getCmd(), "0", String.valueOf(apply.getId()))));
+		qparams.add(new BasicNameValuePair(Constants.CMD, WebUtils.getCmdData(Cmds.GET_DEBT.getCmd(), "0", String.valueOf(apply.getId())+"_0")));
 		
 		JSONObject jsonData = WebUtils.postJson(WebUtils.getAdminServerDomain(zcZones, getZone()), qparams);		
 		if(jsonData.has("data")){
