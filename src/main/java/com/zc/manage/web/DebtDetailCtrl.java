@@ -45,11 +45,12 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	protected transient Listbox listBoxDebt;
 	protected transient Button btn_debt_save;
 	protected transient Button btn_approve;
-	protected transient Button btn_cancel;
+//	protected transient Button btn_cancel;
 	protected transient Button btn_bidwin;
 	protected transient Button btn_close;
 	protected transient Button btn_admin_close;
 	protected transient Button btn_repayment;
+	protected transient Button btn_fail;
 	protected transient Caption cp_title;
 	
 	protected transient Listbox listBoxRepayment;
@@ -96,7 +97,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 
 	public void init() {
-		btn_cancel.setImage(Constants.BTN_ICON_CANCEL);
+		btn_fail.setImage(Constants.BTN_ICON_CANCEL);
 		btn_debt_save.setImage(Constants.BTN_ICON_SAVE);
 		btn_approve.setImage(Constants.BTN_ICON_OK);
 		btn_bidwin.setImage(Constants.BTN_ICON_OK);
@@ -125,6 +126,7 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 		btn_close.setVisible(this.debt.getState() == Constant.STATE_DEALED);
 		btn_repayment.setVisible(this.debt.getState() == Constant.STATE_DEALED && this.debt.getType() == Constant.TYPE_DEPUTY);
 		btn_admin_close.setVisible(this.debt.getState() != Constant.STATE_CLOSED);
+		btn_fail.setVisible(this.debt.getState() == Constant.STATE_NEW || this.debt.getState() == Constant.STATE_VALIDATING);
 		
 		listBoxRepayment.setItemRenderer(new RepaymentRenderer());
 		listBoxRepayment.setModel(new ListModelList(debt.getRepayments()));
@@ -151,7 +153,13 @@ public class DebtDetailCtrl extends GFCBaseCtrl {
 	}
 	
 	public void onClick$btn_approve(Event event) throws Exception {
-		changeMap.put("state", "2");
+		changeMap.put("state", String.valueOf(Constant.STATE_PUBLISH));
+		doSave();
+		doClose();
+	}
+
+	public void onClick$btn_fail(Event event) throws Exception {
+		changeMap.put("state", String.valueOf(Constant.STATE_FAILED));
 		doSave();
 		doClose();
 	}

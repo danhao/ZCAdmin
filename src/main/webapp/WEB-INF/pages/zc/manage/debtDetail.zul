@@ -80,7 +80,7 @@
 					<button id="btn_bidwin" label="中标" tooltiptext="智能中标" />
 					<button id="btn_close" label="结单" tooltiptext="完成并转款" />
 					<button id="btn_admin_close" label="撤单" tooltiptext="撤单" />
-					<button id="btn_cancel"  label="取消" />
+					<button id="btn_fail" label="不通过" tooltiptext="审批不通过" />
 				</toolbar>
 			</south>
 		</borderlayout>
